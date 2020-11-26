@@ -10,7 +10,7 @@ import Combine
 
 class MenuViewController: UIViewController {
     
-    var store: Store!
+    var store: Store<AppState, AppAction>!
 
     @IBOutlet private weak var tableView: UITableView!
     
@@ -50,7 +50,7 @@ extension MenuViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension MenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        store.selectItem(items[indexPath.row])
+        store.send(.menu(.itemSelected(indexPath.row)))
         performSegue(withIdentifier: "showMenuDetail", sender: self)
     }
 }

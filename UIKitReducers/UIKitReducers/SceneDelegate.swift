@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         rootViewController.store = Store(initialValue: AppState(items: [
             AppState.Item(name: "Bread", isFavourite: false, isSelected: false),
             AppState.Item(name: "Cheese", isFavourite: false, isSelected: false),
-        ]))
+        ]), reducer: appReducer)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

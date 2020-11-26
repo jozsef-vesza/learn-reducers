@@ -9,7 +9,7 @@ import UIKit
 
 class RootViewController: UIViewController {
     
-    var store: Store!
+    var store: Store<AppState, AppAction>!
     
     private let items = [
         (title: "Menu", destination: "showMenu"),
