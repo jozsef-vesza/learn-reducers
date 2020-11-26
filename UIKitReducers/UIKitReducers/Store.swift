@@ -28,44 +28,17 @@ struct AppState {
     }
 }
 
-final class Store: ObservableObject {
-    @Published private(set) var value: AppState
+final class Store<Value, Action>: ObservableObject {
+    let reducer: (inout Value, Action) -> Void
     
-    init(initialValue: AppState) {
+    @Published private(set) var value: Value
+    
+    init(initialValue: Value, reducer: @escaping (inout Value, Action) -> Void) {
         self.value = initialValue
+        self.reducer = reducer
     }
     
-    func addToFavourites(_ item: AppState.Item) {
-        value.items = value.items.map {
-            return $0.name == item.name ?
-                AppState.Item(name: item.name, isFavourite: true, isSelected: item.isSelected) :
-                $0
-        }
-    }
-    
-    func removeFromFavourites(_ item: AppState.Item) {
-        value.items = value.items.map {
-            return $0.name == item.name ?
-                AppState.Item(name: item.name, isFavourite: false, isSelected: item.isSelected) :
-                $0
-        }
-    }
-    
-    func selectItem(_ item: AppState.Item) {
-        clearSelection()
-        value.items = value.items.map {
-            return $0.name == item.name ?
-                AppState.Item(name: item.name, isFavourite: item.isFavourite, isSelected: true) :
-                $0
-        }
-    }
-    
-    func clearSelection() {
-        guard let item = value.selectedItem else { return }
-        value.items = value.items.map {
-            return $0.name == item.name ?
-                AppState.Item(name: item.name, isFavourite: item.isFavourite, isSelected: false) :
-                $0
-        }
+    func send(_ action: Action) {
+        reducer(&value, action)
     }
 }
