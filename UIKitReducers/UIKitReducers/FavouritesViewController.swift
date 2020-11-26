@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class FavouritesViewController: UIViewController, StoreUserViewController {
+class FavouritesViewController: UIViewController {
 
     var store: Store!
     

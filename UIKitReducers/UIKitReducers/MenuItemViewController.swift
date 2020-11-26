@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class MenuItemViewController: UIViewController, StoreUserViewController {
+class MenuItemViewController: UIViewController {
     
     var store: Store!
     var item: AppState.Item?

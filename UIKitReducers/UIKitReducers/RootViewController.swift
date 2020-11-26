@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RootViewController: UIViewController, StoreUserViewController {
+class RootViewController: UIViewController {
     
     var store: Store!
     
@@ -46,6 +46,10 @@ extension RootViewController: UITableViewDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        (segue.destination as? StoreUserViewController)?.store = store
+        if let menuViewController = segue.destination as? MenuViewController {
+            menuViewController.store = store
+        } else if let favouritesViewController = segue.destination as? FavouritesViewController {
+            favouritesViewController.store = store
+        }
     }
 }

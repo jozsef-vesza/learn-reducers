@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class MenuViewController: UIViewController, StoreUserViewController {
+class MenuViewController: UIViewController {
     
     var store: Store!
 
@@ -58,7 +58,7 @@ extension MenuViewController: UITableViewDelegate {
 // MARK: - Segue Management
 extension MenuViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destination = segue.destination as? StoreUserViewController else { return }
+        guard let destination = segue.destination as? MenuItemViewController else { return }
         destination.store = store
     }
 }
