@@ -26,11 +26,19 @@ func menuItemReducer(value: inout [AppState.Item], action: MenuItemAction) -> Vo
     case let .addToFavourites(item):
         value = value.map {
             return $0.name == item.name ?
-                AppState.Item(name: item.name, isFavourite: true, isSelected: item.isSelected) :
+                AppState.Item(name: item.name,
+                              isFavourite: true,
+                              isSelected: item.isSelected) :
                 $0
         }
     case let .removeFromFavourites(item):
         removeFromFavourites(value: &value, item: item)
+    case .deselect:
+        value = value.map {
+            AppState.Item(name: $0.name,
+                          isFavourite: $0.isFavourite,
+                          isSelected: false)
+        }
     }
 }
 

@@ -22,12 +22,17 @@ class MenuItemViewController: UIViewController {
         store.$value
             .subscribe(on: DispatchQueue.main)
             .sink { [weak self] (value) in
-                guard let self = self else { return }
-                self.item = value.selectedItem
-                self.navigationItem.title = value.selectedItem?.name
+                guard let self = self, let selectedItem = value.selectedItem else { return }
+                self.item = selectedItem
+                self.navigationItem.title = selectedItem.name
                 self.updateFavouriteButtonTitle()
             }
             .store(in: &subscriptions)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        store.send(.menuItem(.deselect))
     }
     
     @IBAction private func favouriteButtonPressed(_ sender: Any) {

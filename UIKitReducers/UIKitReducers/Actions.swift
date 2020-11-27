@@ -53,6 +53,7 @@ enum MenuAction {
 enum MenuItemAction {
     case addToFavourites(AppState.Item)
     case removeFromFavourites(AppState.Item)
+    case deselect
 }
 
 enum FavouritesAction {
