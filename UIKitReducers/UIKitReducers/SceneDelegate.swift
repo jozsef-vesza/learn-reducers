@@ -21,9 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
               let rootViewController = navController.viewControllers.first as? RootViewController else { return }
         
         let appReducer: (inout AppState, AppAction) -> Void = combine(
-            pullback(menuReducer, value: \.items),
-            pullback(menuItemReducer, value: \.items),
-            pullback(favouritesReducer, value: \.items)
+            pullback(menuReducer, value: \.items, action: \.menu),
+            pullback(menuItemReducer, value: \.items, action: \.menuItem),
+            pullback(favouritesReducer, value: \.items, action: \.favourites)
         )
         rootViewController.store = Store(initialValue: AppState(items: [
             AppState.Item(name: "Bread", isFavourite: false, isSelected: false),
