@@ -18,6 +18,8 @@
 		BBBDF5D6256E6CA00052FE45 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBDF5D5256E6CA00052FE45 /* Store.swift */; };
 		BBBDF621256EAB2C0052FE45 /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBDF620256EAB2C0052FE45 /* FavouritesViewController.swift */; };
 		BBBDF654256FFB290052FE45 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBDF653256FFB290052FE45 /* Actions.swift */; };
+		BBBDF65C25713F6D0052FE45 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBDF65B25713F6C0052FE45 /* State.swift */; };
+		BBBDF66025713F940052FE45 /* Reducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBDF65F25713F940052FE45 /* Reducers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		BBBDF5D5256E6CA00052FE45 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		BBBDF620256EAB2C0052FE45 /* FavouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
 		BBBDF653256FFB290052FE45 /* Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
+		BBBDF65B25713F6C0052FE45 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		BBBDF65F25713F940052FE45 /* Reducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,7 @@
 		BBB83BB4256E5C630005DD93 /* UIKitReducers */ = {
 			isa = PBXGroup;
 			children = (
+				BBBDF65B25713F6C0052FE45 /* State.swift */,
 				BBB83BB5256E5C630005DD93 /* AppDelegate.swift */,
 				BBB83BB7256E5C630005DD93 /* SceneDelegate.swift */,
 				BBB83BB9256E5C630005DD93 /* RootViewController.swift */,
@@ -74,6 +79,7 @@
 				BBBDF5D1256E619C0052FE45 /* MenuItemViewController.swift */,
 				BBBDF5D5256E6CA00052FE45 /* Store.swift */,
 				BBBDF653256FFB290052FE45 /* Actions.swift */,
+				BBBDF65F25713F940052FE45 /* Reducers.swift */,
 				BBB83BBB256E5C630005DD93 /* Main.storyboard */,
 				BBB83BBE256E5C670005DD93 /* Assets.xcassets */,
 				BBB83BC0256E5C670005DD93 /* LaunchScreen.storyboard */,
@@ -157,6 +163,8 @@
 				BBB83BB6256E5C630005DD93 /* AppDelegate.swift in Sources */,
 				BBBDF5D6256E6CA00052FE45 /* Store.swift in Sources */,
 				BBB83BB8256E5C630005DD93 /* SceneDelegate.swift in Sources */,
+				BBBDF65C25713F6D0052FE45 /* State.swift in Sources */,
+				BBBDF66025713F940052FE45 /* Reducers.swift in Sources */,
 				BBBDF654256FFB290052FE45 /* Actions.swift in Sources */,
 				BBBDF621256EAB2C0052FE45 /* FavouritesViewController.swift in Sources */,
 				BBBDF5CF256E5FBD0052FE45 /* MenuViewController.swift in Sources */,

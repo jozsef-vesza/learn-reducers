@@ -7,27 +7,6 @@
 
 import Foundation
 
-struct AppState {
-    var items: [Item]
-    var selectedItem: Item? {
-        return items.first { $0.isSelected }
-    }
-    
-    var favourites: [Item] {
-        return items.filter { $0.isFavourite }
-    }
-    
-    struct Item: Equatable {
-        var name: String
-        var isFavourite: Bool
-        var isSelected: Bool
-        
-        static func == (lhs: Self, rhs: Self) -> Bool {
-            return lhs.name == rhs.name
-        }
-    }
-}
-
 final class Store<Value, Action>: ObservableObject {
     let reducer: (inout Value, Action) -> Void
     
@@ -40,5 +19,30 @@ final class Store<Value, Action>: ObservableObject {
     
     func send(_ action: Action) {
         reducer(&value, action)
+    }
+}
+
+func combine<Value, Action>(
+    _ reducers: (inout Value, Action) -> Void...
+) -> (inout Value, Action) -> Void {
+    
+    return { value, action in
+        for reducer in reducers {
+            reducer(&value, action)
+        }
+    }
+}
+
+func pullback<GlobalValue, LocalValue, GlobalAction, LocalAction>(
+    _ reducer: @escaping (inout LocalValue, LocalAction) -> Void,
+    value: WritableKeyPath<GlobalValue, LocalValue>,
+    action: WritableKeyPath<GlobalAction, LocalAction?>
+) -> (inout GlobalValue, GlobalAction) -> Void {
+    
+    return { globalValue, globalAction in
+        guard let localAction = globalAction[keyPath: action] else {
+            return
+        }
+        reducer(&globalValue[keyPath: value], localAction)
     }
 }
