@@ -10,14 +10,8 @@ import Foundation
 func menuReducer(value: inout [AppState.Item], action: MenuAction) -> Void {
     switch action {
     case let .itemSelected(selectedIndex):
-        var items = value.map {
-            return AppState.Item(name: $0.name,
-                                 isFavourite: $0.isFavourite,
-                                 isSelected: false)
-        }
-        items[selectedIndex].isSelected = true
-        
-        value = items
+        removeSelection(value: &value)
+        value[selectedIndex].isSelected = true
     }
 }
 
@@ -34,11 +28,7 @@ func menuItemReducer(value: inout [AppState.Item], action: MenuItemAction) -> Vo
     case let .removeFromFavourites(item):
         removeFromFavourites(value: &value, item: item)
     case .deselect:
-        value = value.map {
-            AppState.Item(name: $0.name,
-                          isFavourite: $0.isFavourite,
-                          isSelected: false)
-        }
+        removeSelection(value: &value)
     }
 }
 
@@ -58,6 +48,14 @@ func logging(
         print("State:")
         dump(value)
         print("---")
+    }
+}
+
+private func removeSelection(value: inout [AppState.Item]) {
+    value = value.map {
+        AppState.Item(name: $0.name,
+                      isFavourite: $0.isFavourite,
+                      isSelected: false)
     }
 }
 

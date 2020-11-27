@@ -1,5 +1,5 @@
 //
-//  State.swift
+//  AppState.swift
 //  UIKitReducers
 //
 //  Created by József Vesza on 2020. 11. 27..
