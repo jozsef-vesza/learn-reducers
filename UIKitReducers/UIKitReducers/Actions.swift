@@ -32,6 +32,18 @@ func pullback<GlobalValue, LocalValue, GlobalAction, LocalAction>(
     }
 }
 
+func logging(
+    _ reducer: @escaping (inout AppState, AppAction) -> Void
+) -> (inout AppState, AppAction) -> Void {
+    return { value, action in
+        reducer(&value, action)
+        print("Action: \(action)")
+        print("State:")
+        dump(value)
+        print("---")
+    }
+}
+
 enum AppAction {
     case menu(MenuAction)
     case menuItem(MenuItemAction)
