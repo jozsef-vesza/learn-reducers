@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB8917AA25714C8C005ED854 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8917A925714C8C005ED854 /* Model.swift */; };
 		BBB83BB6256E5C630005DD93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB83BB5256E5C630005DD93 /* AppDelegate.swift */; };
 		BBB83BB8256E5C630005DD93 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB83BB7256E5C630005DD93 /* SceneDelegate.swift */; };
 		BBB83BBA256E5C630005DD93 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB83BB9256E5C630005DD93 /* RootViewController.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB8917A925714C8C005ED854 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		BBB83BB2256E5C630005DD93 /* UIKitReducers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIKitReducers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBB83BB5256E5C630005DD93 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBB83BB7256E5C630005DD93 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				BBBDF5CE256E5FBD0052FE45 /* MenuViewController.swift */,
 				BBBDF5D1256E619C0052FE45 /* MenuItemViewController.swift */,
 				BBBDF5D5256E6CA00052FE45 /* Store.swift */,
+				BB8917A925714C8C005ED854 /* Model.swift */,
 				BBBDF653256FFB290052FE45 /* Actions.swift */,
 				BBBDF65F25713F940052FE45 /* Reducers.swift */,
 				BBB83BBB256E5C630005DD93 /* Main.storyboard */,
@@ -166,6 +169,7 @@
 				BBBDF65C25713F6D0052FE45 /* AppState.swift in Sources */,
 				BBBDF66025713F940052FE45 /* Reducers.swift in Sources */,
 				BBBDF654256FFB290052FE45 /* Actions.swift in Sources */,
+				BB8917AA25714C8C005ED854 /* Model.swift in Sources */,
 				BBBDF621256EAB2C0052FE45 /* FavouritesViewController.swift in Sources */,
 				BBBDF5CF256E5FBD0052FE45 /* MenuViewController.swift in Sources */,
 			);

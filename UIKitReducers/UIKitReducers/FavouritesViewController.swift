@@ -14,7 +14,7 @@ class FavouritesViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     
-    private var items: [AppState.Item] = []
+    private var items: [Item] = []
     private var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {

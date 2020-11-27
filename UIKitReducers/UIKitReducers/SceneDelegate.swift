@@ -26,8 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             pullback(favouritesReducer, value: \.items, action: \.favourites)
         )
         rootViewController.store = Store(initialValue: AppState(items: [
-            AppState.Item(name: "Bread", isFavourite: false, isSelected: false),
-            AppState.Item(name: "Cheese", isFavourite: false, isSelected: false),
+            Item(name: "Bread", isFavourite: false, isSelected: false),
+            Item(name: "Cheese", isFavourite: false, isSelected: false),
         ]), reducer: logging(appReducer))
     }
 

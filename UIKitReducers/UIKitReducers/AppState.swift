@@ -16,14 +16,4 @@ struct AppState {
     var favourites: [Item] {
         return items.filter { $0.isFavourite }
     }
-    
-    struct Item: Equatable {
-        var name: String
-        var isFavourite: Bool
-        var isSelected: Bool
-        
-        static func == (lhs: Self, rhs: Self) -> Bool {
-            return lhs.name == rhs.name
-        }
-    }
 }

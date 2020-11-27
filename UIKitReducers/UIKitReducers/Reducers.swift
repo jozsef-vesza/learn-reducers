@@ -7,7 +7,7 @@
 
 import Foundation
 
-func menuReducer(value: inout [AppState.Item], action: MenuAction) -> Void {
+func menuReducer(value: inout [Item], action: MenuAction) -> Void {
     switch action {
     case let .itemSelected(selectedIndex):
         removeSelection(value: &value)
@@ -15,12 +15,12 @@ func menuReducer(value: inout [AppState.Item], action: MenuAction) -> Void {
     }
 }
 
-func menuItemReducer(value: inout [AppState.Item], action: MenuItemAction) -> Void {
+func menuItemReducer(value: inout [Item], action: MenuItemAction) -> Void {
     switch action {
     case let .addToFavourites(item):
         value = value.map {
             return $0.name == item.name ?
-                AppState.Item(name: item.name,
+                Item(name: item.name,
                               isFavourite: true,
                               isSelected: item.isSelected) :
                 $0
@@ -32,7 +32,7 @@ func menuItemReducer(value: inout [AppState.Item], action: MenuItemAction) -> Vo
     }
 }
 
-func favouritesReducer(value: inout [AppState.Item], action: FavouritesAction) -> Void {
+func favouritesReducer(value: inout [Item], action: FavouritesAction) -> Void {
     switch action {
     case let .removeFromFavourites(item):
         removeFromFavourites(value: &value, item: item)
@@ -51,18 +51,18 @@ func logging(
     }
 }
 
-private func removeSelection(value: inout [AppState.Item]) {
+private func removeSelection(value: inout [Item]) {
     value = value.map {
-        AppState.Item(name: $0.name,
+        Item(name: $0.name,
                       isFavourite: $0.isFavourite,
                       isSelected: false)
     }
 }
 
-private func removeFromFavourites(value: inout [AppState.Item], item: AppState.Item) {
+private func removeFromFavourites(value: inout [Item], item: Item) {
     value = value.map {
         return $0.name == item.name ?
-            AppState.Item(name: item.name, isFavourite: false, isSelected: item.isSelected) :
+            Item(name: item.name, isFavourite: false, isSelected: item.isSelected) :
             $0
     }
 }

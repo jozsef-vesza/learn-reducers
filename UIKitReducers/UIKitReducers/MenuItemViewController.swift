@@ -11,7 +11,7 @@ import Combine
 class MenuItemViewController: UIViewController {
     
     var store: Store<AppState, AppAction>!
-    var item: AppState.Item?
+    var item: Item?
     
     @IBOutlet private weak var favouriteButton: UIButton!
     
