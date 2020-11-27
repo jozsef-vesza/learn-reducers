@@ -8,13 +8,22 @@
 import Foundation
 
 func combine<Value, Action>(
-    _ first: @escaping (inout Value, Action) -> Void,
-    _ second: @escaping (inout Value, Action) -> Void
+    _ reducers: (inout Value, Action) -> Void...
 ) -> (inout Value, Action) -> Void {
     
     return { value, action in
-        first(&value, action)
-        second(&value, action)
+        for reducer in reducers {
+            reducer(&value, action)
+        }
+    }
+}
+
+func pullback<LocalValue, GlobalValue, Action>(
+    _ reducer: @escaping (inout LocalValue, Action) -> Void,
+    value: WritableKeyPath<GlobalValue, LocalValue>
+) -> (inout GlobalValue, Action) -> Void {
+    return { globalValue, action in
+        reducer(&globalValue[keyPath: value], action)
     }
 }
 
@@ -37,26 +46,26 @@ enum FavouritesAction {
     case removeFromFavourites(AppState.Item)
 }
 
-func menuReducer(value: inout AppState, action: AppAction) -> Void {
+func menuReducer(value: inout [AppState.Item], action: AppAction) -> Void {
     switch action {
     case let .menu(.itemSelected(selectedIndex)):
-        var items = value.items.map {
+        var items = value.map {
             return AppState.Item(name: $0.name,
                                  isFavourite: $0.isFavourite,
                                  isSelected: false)
         }
         items[selectedIndex].isSelected = true
         
-        value.items = items
+        value = items
     default:
         break
     }
 }
 
-func menuItemReducer(value: inout AppState, action: AppAction) -> Void {
+func menuItemReducer(value: inout [AppState.Item], action: AppAction) -> Void {
     switch action {
     case let .menuItem(.addToFavourites(item)):
-        value.items = value.items.map {
+        value = value.map {
             return $0.name == item.name ?
                 AppState.Item(name: item.name, isFavourite: true, isSelected: item.isSelected) :
                 $0
@@ -68,7 +77,7 @@ func menuItemReducer(value: inout AppState, action: AppAction) -> Void {
     }
 }
 
-func favouritesReducer(value: inout AppState, action: AppAction) -> Void {
+func favouritesReducer(value: inout [AppState.Item], action: AppAction) -> Void {
     switch action {
     case let .favourites(.removeFromFavourites(item)):
         removeFromFavourites(value: &value, item: item)
@@ -77,8 +86,8 @@ func favouritesReducer(value: inout AppState, action: AppAction) -> Void {
     }
 }
 
-private func removeFromFavourites(value: inout AppState, item: AppState.Item) {
-    value.items = value.items.map {
+private func removeFromFavourites(value: inout [AppState.Item], item: AppState.Item) {
+    value = value.map {
         return $0.name == item.name ?
             AppState.Item(name: item.name, isFavourite: false, isSelected: item.isSelected) :
             $0
