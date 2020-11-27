@@ -19,6 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         guard let navController = window?.rootViewController as? UINavigationController,
               let rootViewController = navController.viewControllers.first as? RootViewController else { return }
+        let appReducer = combine(combine(menuReducer, menuItemReducer), favouritesReducer)
         rootViewController.store = Store(initialValue: AppState(items: [
             AppState.Item(name: "Bread", isFavourite: false, isSelected: false),
             AppState.Item(name: "Cheese", isFavourite: false, isSelected: false),
