@@ -10,7 +10,7 @@ import Combine
 
 class MenuItemViewController: UIViewController {
     
-    var store: Store<Item?, AppAction>!
+    var store: Store<Item?, MenuItemAction>!
     var item: Item?
     
     @IBOutlet private weak var favouriteButton: UIButton!
@@ -32,14 +32,14 @@ class MenuItemViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        store.send(.menuItem(.deselect))
+        store.send(.deselect)
     }
     
     @IBAction private func favouriteButtonPressed(_ sender: Any) {
         guard let item = item else { return }
         item.isFavourite ?
-            store.send(.menuItem(.removeFromFavourites(item))) :
-            store.send(.menuItem(.addToFavourites(item)))
+            store.send(.removeFromFavourites(item)) :
+            store.send(.addToFavourites(item))
     }
     
     private func updateFavouriteButtonTitle() {

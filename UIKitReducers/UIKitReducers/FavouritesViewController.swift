@@ -10,7 +10,7 @@ import Combine
 
 class FavouritesViewController: UIViewController {
 
-    var store: Store<[Item], AppAction>!
+    var store: Store<[Item], FavouritesAction>!
     
     @IBOutlet private weak var tableView: UITableView!
     
@@ -52,7 +52,7 @@ extension FavouritesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let item = items[indexPath.row]
-            store.send(.favourites(.removeFromFavourites(item)))
+            store.send(.removeFromFavourites(item))
         }
     }
 }
