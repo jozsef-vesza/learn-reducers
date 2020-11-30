@@ -47,9 +47,9 @@ extension RootViewController: UITableViewDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let menuViewController = segue.destination as? MenuViewController {
-            menuViewController.store = store
+            menuViewController.store = store.view { ($0.items, $0.selectedItem) }
         } else if let favouritesViewController = segue.destination as? FavouritesViewController {
-            favouritesViewController.store = store
+            favouritesViewController.store = store.view { $0.favourites }
         }
     }
 }

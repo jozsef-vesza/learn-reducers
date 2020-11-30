@@ -10,7 +10,7 @@ import Combine
 
 class FavouritesViewController: UIViewController {
 
-    var store: Store<AppState, AppAction>!
+    var store: Store<[Item], AppAction>!
     
     @IBOutlet private weak var tableView: UITableView!
     
@@ -24,7 +24,7 @@ class FavouritesViewController: UIViewController {
             .subscribe(on: DispatchQueue.main)
             .sink { [weak self] (value) in
                 guard let self = self else { return }
-                self.items = value.favourites
+                self.items = value
                 self.tableView.reloadData()
             }
             .store(in: &subscriptions)

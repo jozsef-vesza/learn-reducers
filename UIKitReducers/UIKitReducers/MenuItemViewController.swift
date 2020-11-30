@@ -10,7 +10,7 @@ import Combine
 
 class MenuItemViewController: UIViewController {
     
-    var store: Store<AppState, AppAction>!
+    var store: Store<Item?, AppAction>!
     var item: Item?
     
     @IBOutlet private weak var favouriteButton: UIButton!
@@ -22,7 +22,7 @@ class MenuItemViewController: UIViewController {
         store.$value
             .subscribe(on: DispatchQueue.main)
             .sink { [weak self] (value) in
-                guard let self = self, let selectedItem = value.selectedItem else { return }
+                guard let self = self, let selectedItem = value else { return }
                 self.item = selectedItem
                 self.navigationItem.title = selectedItem.name
                 self.updateFavouriteButtonTitle()

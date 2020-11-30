@@ -8,9 +8,11 @@
 import UIKit
 import Combine
 
+typealias MenuState = (items: [Item], selectedItem: Item?)
+
 class MenuViewController: UIViewController {
     
-    var store: Store<AppState, AppAction>!
+    var store: Store<MenuState, AppAction>!
 
     @IBOutlet private weak var tableView: UITableView!
     
@@ -59,6 +61,6 @@ extension MenuViewController: UITableViewDelegate {
 extension MenuViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destination = segue.destination as? MenuItemViewController else { return }
-        destination.store = store
+        destination.store = store.view { $0.selectedItem }
     }
 }
