@@ -18,15 +18,9 @@ func menuReducer(value: inout [Item], action: MenuAction) -> Void {
 func menuItemReducer(value: inout [Item], action: MenuItemAction) -> Void {
     switch action {
     case let .addToFavourites(item):
-        value = value.map {
-            return $0.name == item.name ?
-                Item(name: item.name,
-                              isFavourite: true,
-                              isSelected: item.isSelected) :
-                $0
-        }
+        toggleFavourite(value: &value, item: item, isFavourite: true)
     case let .removeFromFavourites(item):
-        removeFromFavourites(value: &value, item: item)
+        toggleFavourite(value: &value, item: item, isFavourite: false)
     case .deselect:
         removeSelection(value: &value)
     }
@@ -35,7 +29,7 @@ func menuItemReducer(value: inout [Item], action: MenuItemAction) -> Void {
 func favouritesReducer(value: inout [Item], action: FavouritesAction) -> Void {
     switch action {
     case let .removeFromFavourites(item):
-        removeFromFavourites(value: &value, item: item)
+        toggleFavourite(value: &value, item: item, isFavourite: false)
     }
 }
 
@@ -52,17 +46,15 @@ func logging(
 }
 
 private func removeSelection(value: inout [Item]) {
-    value = value.map {
-        Item(name: $0.name,
-                      isFavourite: $0.isFavourite,
-                      isSelected: false)
+    for var item in value {
+        if item.isSelected { item.isSelected = false }
     }
 }
 
-private func removeFromFavourites(value: inout [Item], item: Item) {
-    value = value.map {
-        return $0.name == item.name ?
-            Item(name: item.name, isFavourite: false, isSelected: item.isSelected) :
-            $0
+private func toggleFavourite(value: inout [Item], item: Item, isFavourite: Bool) {
+    for (index, storedItem) in value.enumerated() {
+        if storedItem == item {
+            value[index].isFavourite = isFavourite
+        }
     }
 }
