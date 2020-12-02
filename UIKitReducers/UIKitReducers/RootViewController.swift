@@ -51,17 +51,15 @@ extension RootViewController: UITableViewDelegate {
                 value: { ($0.items, $0.selectedItem) },
                 action: {
                     switch $0 {
-                    case let .menu(action):
-                        return AppAction.menu(action)
-                    case let .menuItem(action):
-                        return AppAction.menuItem(action)
+                    case let .menu(action): return .menu(action)
+                    case let .menuItem(action): return .menuItem(action)
                     }
                 }
             )
         } else if let favouritesViewController = segue.destination as? FavouritesViewController {
             favouritesViewController.store = store.view(
                 value: { $0.favourites },
-                action: { AppAction.favourites($0) }
+                action: { .favourites($0) }
             )
         }
     }
